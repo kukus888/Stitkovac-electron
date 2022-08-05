@@ -1,0 +1,5 @@
+1. Fix error message (currently doesnt show. Also, log trace in console for better examination.
+2. When inputting model, check for S-X900-1, and Cut S- and -1 part (also check for SM etc)
+3. Apply overflow from current cell to the next if it is longer than 12 characters. Also enable automagical arrangement of the device's properties (if smth is empty, move non empty cell contents up,...)
+
+4. BIG: make editing saved contents happen
