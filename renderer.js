@@ -29,6 +29,9 @@ document.getElementById("btnAlignPrinter").addEventListener("click", () => {
 document.getElementById("btnProcessCSV").addEventListener("click", () => {
     parseCSV();
 });
+document.getElementById("btnOpenSettings").addEventListener("click", () => {
+    redirect('settings.html');
+});
 document.getElementById("btnClearAll").addEventListener("click", () => {
     for (i = 0; i < document.getElementsByTagName("tr").length; i++) {
         if (document.getElementsByTagName("tr").item(i).id.includes("devTr")) {
@@ -164,3 +167,6 @@ function alignPrintHead() {
     ipcRenderer.send('alignPrintHead', true);
 }
 
+function redirect(url){
+    ipcRenderer.send('redirect', url);
+}

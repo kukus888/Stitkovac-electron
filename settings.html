@@ -10,27 +10,17 @@
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <title>Hello World!</title>
 </head>
 
 <body>
     <ul class="navbar navbar-expand-sm bg-light" id="topNavBar">
         <div class="container-fluid" id="topBarDiv">
             <li class="nav-item">
-                <h1 class="navbar-brand h1">Label maker</h1>
+                <h1 class="navbar-brand h1">Settings</h1>
             </li>
             <div class="d-flex">
                 <li class="nav-link mx-sm-2">
-                    <button class="btn btn-primary" id="btnOpenSettings" data-bs-toggle="modal" data-bs-target="#exampleModal">Settings</button>
-                </li>
-                <li class="nav-link mx-sm-2">
-                    <button class="btn btn-primary" id="btnLoadCSV" data-bs-toggle="modal" data-bs-target="#exampleModal">Load CSV</button>
-                </li>
-                <li class="nav-link mx-sm-2">
-                    <button class="btn btn-primary" id="btnAlignPrinter">Align Printer</button>
-                </li>
-                <li class="nav-link mx-sm-2">
-                    <button class="btn btn-success" id="btnPrintAll">Print</button>
+                    <button class="btn btn-success" id="btnGoHome">Go back</button>
                 </li>
             </div>
         </div>
@@ -39,19 +29,16 @@
         <table class="table table-hover table-striped me-auto" id="datatable">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Control Number</th>
-                    <th scope="col">Model</th>
-                    <th scope="col">IMEI</th>
-                    <th scope="col">Serial Number</th>
-                    <th scope="col">SMSN</th>
-                    <th scope="col">Print</th>
+                    <th scope="col">Function</th>
+                    <th scope="col">Arguments</th>
+                    <th scope="col"></th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody id="datatableBody">
                 <tr>
                     <div id="newLabel" class="input-group">
-                        <td class="align-middle">~</td>
+                        <td></td>
                         <td>
                             <input class="input bg-transparent m-0 form-control" type="text" id="inputNewCN">
                         </td>
@@ -102,7 +89,7 @@
         We are using Node.js <span id="node-version"></span>, Chromium <span id="chrome-version"></span>, and Electron
         <span id="electron-version"></span>.
     </div>
-    <script src="./renderer.js"></script>
+    <script src="./settingsRenderer.js"></script>
 </body>
 
 </html>
