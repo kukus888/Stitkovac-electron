@@ -35,7 +35,7 @@ window.electronAPI.handleSyncConfig((event, data) => {
 
 function renderConfig() {
     //clear all config options...
-    for (i = 0; i < document.getElementsByTagName("tr").length; i++) {
+    for (i = document.getElementsByTagName("tr").length -1; i > 0 ; i--) {
         if (!document.getElementsByTagName("tr").item(i).id.includes("header")) {
             document.getElementsByTagName("tr").item(i).remove();
         }
@@ -54,14 +54,14 @@ function renderConfig() {
                 args.arg0 = "This has no arguments"
                 break;
             case 1:
-                args.arg0 = Object.keys(settings[i].arguments[0]);
-                args.opt0 = Object.values(config.settings[0].arguments[0])[0];
+                args.arg0 = Object.keys(settings[i].arguments[0])[0];
+                args.opt0 = Object.values(config.settings[i].arguments[0])[0];
                 break;
             case 2:
-                args.arg0 = Object.keys(settings[i].arguments[0]);
-                args.opt0 = Object.values(config.settings[0].arguments[0])[0];
-                args.arg1 = Object.keys(settings[i].arguments[1]);
-                args.opt1 = Object.values(config.settings[0].arguments[1])[0];
+                args.arg0 = Object.keys(settings[i].arguments[0])[0];
+                args.opt0 = Object.values(config.settings[i].arguments[0])[0];
+                args.arg1 = Object.keys(settings[i].arguments[1])[0];
+                args.opt1 = Object.values(config.settings[i].arguments[1])[0];
                 break;
         }
         let id = `configItem${i}`;
@@ -70,13 +70,13 @@ function renderConfig() {
                         ${args.arg0}
                     </td>
                     <td class="align-middle">
-                        <input class="input bg-transparent m-0 form-control" type="text" id="inputNewCN" value="${args.opt0}">
+                        <input class="input bg-transparent m-0 form-control" type="text" id="${id}InputArg0" value="${args.opt0}">
                     </td>
                     <td class="align-middle">
                         ${args.arg1}
                     </td>
                     <td class="align-middle">
-                    <input class="input bg-transparent m-0 form-control" type="text" id="inputNewCN" value="${args.opt1}">
+                    <input class="input bg-transparent m-0 form-control" type="text" id="${id}InputArg1" value="${args.opt1}">
                     </td>
                     <td>
                         <button class="btn btn-outline-secondary" id="btn${id}Save">Save</button>
@@ -88,12 +88,35 @@ function renderConfig() {
         document.getElementById("datatableBody").appendChild(newTr);
         document.getElementById(id).innerHTML += elementStr;
 
-        document.getElementById("btn${id}Run").addEventListener("click", () => {
-           RunConfigurationCommand(settings[i]);
+        //prepare context for binding actions
+        //weird workaround, doesnt work with i directly
+        let num = i
+        let argsOpt0 = args.arg0
+        let argsOpt1 = args.arg1
+        let inputArgsId0 = `${id}InputArg0`
+        let inputArgsId1 = `${id}InputArg1`
+        let btnSaveId = `btn${id}Save`
+        document.getElementById(`btn${id}Run`).addEventListener("click", () => {
+            try{
+                document.getElementById(btnSaveId).click()
+            }catch(e){
+                console.log(e)
+            }
+            RunConfigurationCommand(settings[num]);
         });
 
-        document.getElementById("btn${id}Save").addEventListener("click", () => {
-            
+        document.getElementById(btnSaveId).addEventListener("click", () => {
+            try{
+                config.settings[num].arguments[0][argsOpt0] = document.getElementById(inputArgsId0).value
+                config.settings[num].arguments[1][argsOpt1] = document.getElementById(inputArgsId1).value
+            }catch(e){
+                if(e.name === 'TypeError'){
+                    console.log(e)
+                }else{
+                    console.error(e)
+                }
+            }
+            ipcRenderer.send('save-config', config);
         });
     }
 }

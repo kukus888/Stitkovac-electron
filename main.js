@@ -79,6 +79,12 @@ function handleLoadCfg(event, data){
 function syncConfig(){
   win.webContents.send('sync-config', config);
 }
+function handleSaveConfig(event, data){
+  let fs = require('fs');
+  config = data
+  let configStr = JSON.stringify(config);
+  fs.writeFileSync("config.json", configStr)
+}
 
 app.whenReady().then(() => {
   ipcMain.on('printAll', handlePrintAll);
@@ -86,6 +92,7 @@ app.whenReady().then(() => {
   ipcMain.on('sync-dev', handleSyncingDevices);
   ipcMain.on('redirect', handleRedirection);
   ipcMain.on('load-config', handleLoadCfg);
+  ipcMain.on('save-config', handleSaveConfig);
   createWindow()
 })
 
