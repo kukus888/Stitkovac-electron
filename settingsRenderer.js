@@ -1,24 +1,11 @@
-class Device {
-    CN;
-    Model;
-    IMEI;
-    SN;
-    SMSN;
-    constructor(CN, Model, IMEI, SN, SMSN) {
-        this.CN = CN;
-        this.Model = Model;
-        this.IMEI = IMEI;
-        this.SN = SN;
-        this.SMSN = SMSN;
-    }
-}
-
-//create an empty array for devices
-let devices = []
+let config;
 
 //Bind all necessary clicks
 document.getElementById("btnGoHome").addEventListener("click", () => {
     redirect('home');
+});
+document.getElementById("btnLoadCfg").addEventListener("click", () => {
+    ipcRenderer.send('load-config');
 });
 document.getElementById("btnAlignPrinter").addEventListener("click", () => {
     alignPrintHead();
@@ -44,10 +31,13 @@ window.electronAPI.handlePrinterErr((event, value) => {
         } catch (error) { }
     }
 });
+window.electronAPI.handleSyncConfig((event, data) => {
+    config = data;
+    renderConfig();
+});
 
-function printAll() {
-    ipcRenderer.send('sync-dev', devices);
-    ipcRenderer.send('printAll', true);
+function renderConfig(){
+
 }
 
 function alignPrintHead() {

@@ -71,7 +71,13 @@ function handleAligningPrintHead(event, data) {
 }
 
 function handleLoadCfg(event, data){
-  JSON.parse('config.json');
+  let fs = require('fs');
+  let configStr = fs.readFileSync("config.json", 'utf-8');
+  config = JSON.parse(configStr);
+  syncConfig();
+}
+function syncConfig(){
+  win.webContents.send('sync-config', config);
 }
 
 app.whenReady().then(() => {
@@ -79,6 +85,7 @@ app.whenReady().then(() => {
   ipcMain.on('alignPrintHead', handleAligningPrintHead);
   ipcMain.on('sync-dev', handleSyncingDevices);
   ipcMain.on('redirect', handleRedirection);
+  ipcMain.on('load-config', Config.handleLoadCfg);
   createWindow()
 })
 
