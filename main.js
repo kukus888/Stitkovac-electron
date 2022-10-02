@@ -85,7 +85,7 @@ app.whenReady().then(() => {
   ipcMain.on('alignPrintHead', handleAligningPrintHead);
   ipcMain.on('sync-dev', handleSyncingDevices);
   ipcMain.on('redirect', handleRedirection);
-  ipcMain.on('load-config', Config.handleLoadCfg);
+  ipcMain.on('load-config', handleLoadCfg);
   createWindow()
 })
 
