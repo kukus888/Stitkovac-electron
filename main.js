@@ -1,11 +1,12 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path')
-const Printer = require('./TSC/Printing')
+const PrinterLabel = require('./TSC/Printing')
+const PrinterBuffer = require('./TSC/TscBuffer')
 const $ = require('jquery');
 const { readyException } = require('jquery');
 
 let devices = [];
-let printer = new Printer(128, 64);
+let printer = new PrinterLabel(128, 64);
 let win;
 let config;
 
@@ -27,16 +28,30 @@ const createWindow = () => {
   //win.webContents.openDevTools()
 }
 
-function handleFrontEndRequest(event, data) {
-  switch(data.request){
-    case "syncDevices":
+function handlePrinterConfiguration(event, data) {
+  //convert config data args to arguments
+  let arg0, arg1, buffer;
+  switch(data.arguments.length){
+    case 0:
+      PrinterBuffer[data.name]();
       break;
-    case "redirect":
-      
+    case 1:
+      arg0 = Object.values(data.arguments[0])[0];
+      buffer = PrinterBuffer[data.name](arg0);
+      break;
+    case 2:
+      arg0 = Object.values(data.arguments[0])[0];
+      arg1 = Object.values(data.arguments[1])[0];
+      buffer = PrinterBuffer[data.name](arg0, arg1);
       break;
     default:
-      throw Error("Chyba lol");
+      throw 'NotImplemented'
       break;
+  }
+  try{
+    printer.write(buffer);
+  }catch(e){
+    win.webContents.send('printer-err', e)
   }
 }
 
@@ -58,9 +73,8 @@ function handlePrintAll(event, data) {
     devices.forEach(e => {
       printer.printLabel(e.CN, e.Model, e.IMEI, e.SN, e.SMSN, "PRA2 / PRTN")
     });
-    win.webContents.send('printer-err', false)
   } catch (err) {
-    win.webContents.send('printer-err', true)
+    win.webContents.send('printer-err', err)
   }
 }
 
@@ -93,6 +107,7 @@ app.whenReady().then(() => {
   ipcMain.on('redirect', handleRedirection);
   ipcMain.on('load-config', handleLoadCfg);
   ipcMain.on('save-config', handleSaveConfig);
+  ipcMain.on('config-command', handlePrinterConfiguration);
   createWindow()
 })
 

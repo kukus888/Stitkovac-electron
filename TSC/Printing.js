@@ -77,6 +77,13 @@ class Printer {
     this.labelHeightPts = labelHeight;
   }
   /**
+   * Writes data to printer
+   * @param {String} data Data to be written to printer
+   */
+  write(data){
+    xPrinterDev.Write(data);
+  }
+  /**
    * Prints labels as fast as possible
    * @param {String} QR String to be encoded in QR
    * @param {String} BigText Big Text, 5 chars max
