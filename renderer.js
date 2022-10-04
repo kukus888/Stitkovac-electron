@@ -29,6 +29,9 @@ document.getElementById("btnAlignPrinter").addEventListener("click", () => {
 document.getElementById("btnProcessCSV").addEventListener("click", () => {
     parseCSV();
 });
+document.getElementById("btnOpenSettings").addEventListener("click", () => {
+    redirect('settings.html');
+});
 document.getElementById("btnClearAll").addEventListener("click", () => {
     for (i = 0; i < document.getElementsByTagName("tr").length; i++) {
         if (document.getElementsByTagName("tr").item(i).id.includes("devTr")) {
@@ -45,17 +48,11 @@ printerErrMsg.classList.add("alert", "alert-danger", "align-middle", "m-0", "px-
 document.getElementById("topNavBar").appendChild(printerErrMsg)
 //bind the error throwing to the message
 window.electronAPI.handlePrinterErr((event, value) => {
-    if (value === true) {
-        console.log("Frontend recieved an error about a printer. Good luck.")
-        try {
-            document.getElementById("printerErrMsg").classList.replace("d-none", "visible")
-        } catch (error) { }
-    } else {
-        console.log("Frontend recieved a cancellation of an error about a printer. Good work.")
-        try {
-            document.getElementById("printerErrMsg").classList.replace("visible", "d-none")
-        } catch (error) { }
-    }
+    console.error(data)
+    try {
+        document.getElementById("printerErrMsg").classList.replace("d-none", "visible")
+    } catch (error) { }
+    //document.getElementById("printerErrMsg").classList.replace("visible", "d-none")
 });
 
 function btnAddRow() {
@@ -136,7 +133,7 @@ function parseCSV() {
             let SN = line.split(',')[3].toString()
             if ((IMEI.length > 13) && ((SN === undefined) || (SN === "") || (SN === "undefined"))) {
                 SN = IMEI.slice(12, IMEI.length)
-                IMEI = IMEI.slice(0,12)
+                IMEI = IMEI.slice(0, 12)
             }
             if (SN === "undefined") {
                 SN = ""
@@ -164,3 +161,6 @@ function alignPrintHead() {
     ipcRenderer.send('alignPrintHead', true);
 }
 
+function redirect(url) {
+    ipcRenderer.send('redirect', url);
+}
