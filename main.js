@@ -32,7 +32,7 @@ function handleSyncingDevices(event, data) {
 function handlePrintAll(event, data) {
   try {
     devices.forEach(e => {
-      printer.printLabel(e.CN, e.Model, e.IMEI, e.SN, e.SMSN, "PRA2 / PRTN")
+      printer.printLabel(e.CN, e.Model, e.IMEI, e.SN, e.SMSN, "BRA1 / BRTN")
     });
     win.webContents.send('printer-err', false)
   } catch (err) {
