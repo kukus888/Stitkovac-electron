@@ -11,11 +11,13 @@ let win;
 let config;
 
 //https://www.electronjs.org/docs/latest/tutorial/tutorial-packaging
+//https://www.electronjs.org/de/docs/latest/tutorial/window-customization
 
 const createWindow = () => {
   win = new BrowserWindow({
     width: 1000,
     height: 600,
+    title: "Stitkovac",
     webPreferences: {
       preload: path.join(app.getAppPath(), 'preload.js'),
       nodeIntegration: true
