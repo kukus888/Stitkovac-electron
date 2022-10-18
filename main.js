@@ -28,12 +28,28 @@ const createWindow = () => {
   //win.webContents.openDevTools()
 }
 
+function handleLoadCfg(event, data){
+  let fs = require('fs');
+  let configStr = fs.readFileSync("config.json", 'utf-8');
+  config = JSON.parse(configStr);
+  syncConfig();
+}
+function syncConfig(){
+  win.webContents.send('sync-config', config);
+}
+function handleSaveConfig(event, data){
+  let fs = require('fs');
+  config = data
+  let configStr = JSON.stringify(config);
+  fs.writeFileSync("config.json", configStr)
+}
+
 function handlePrinterConfiguration(event, data) {
   //convert config data args to arguments
   let arg0, arg1, buffer;
   switch(data.arguments.length){
     case 0:
-      PrinterBuffer[data.name]();
+      buffer = PrinterBuffer[data.name]();
       break;
     case 1:
       arg0 = Object.values(data.arguments[0])[0];
@@ -49,7 +65,7 @@ function handlePrinterConfiguration(event, data) {
       break;
   }
   try{
-    printer.write(buffer);
+    printer.write(buffer)
   }catch(e){
     win.webContents.send('printer-err', e)
   }
@@ -69,9 +85,10 @@ function handleSyncingDevices(event, data) {
 }
 
 function handlePrintAll(event, data) {
+  handleLoadCfg();
   try {
     devices.forEach(e => {
-      printer.printLabel(e.CN, e.Model, e.IMEI, e.SN, e.SMSN, "BRA1 / BRTN")
+      printer.printLabel(e.CN, e.Model, e.IMEI, e.SN, e.SMSN, config.signature, config)
     });
   } catch (err) {
     win.webContents.send('printer-err', err)
@@ -82,22 +99,6 @@ function handleAligningPrintHead(event, data) {
   if (data === true) {
     printer.autoAlignHead();
   }
-}
-
-function handleLoadCfg(event, data){
-  let fs = require('fs');
-  let configStr = fs.readFileSync("config.json", 'utf-8');
-  config = JSON.parse(configStr);
-  syncConfig();
-}
-function syncConfig(){
-  win.webContents.send('sync-config', config);
-}
-function handleSaveConfig(event, data){
-  let fs = require('fs');
-  config = data
-  let configStr = JSON.stringify(config);
-  fs.writeFileSync("config.json", configStr)
 }
 
 app.whenReady().then(() => {

@@ -80,7 +80,10 @@ class Printer {
    * Writes data to printer
    * @param {String} data Data to be written to printer
    */
-  write(data){
+  async write(data){
+    await this.#writeAsync(data);
+  }
+  #writeAsync(data){
     xPrinterDev.Write(data);
   }
   /**
@@ -92,8 +95,8 @@ class Printer {
    * @param {String} Text3 Smaller text, 12 chars max
    * @param {String} Text4 Smaller text, 12 chars max
    */
-  async printLabel(QR, BigText, Text1, Text2, Text3, Text4) {
-    await printText(QR, BigText, Text1, Text2, Text3, Text4);
+  async printLabel(QR, BigText, Text1, Text2, Text3, Text4, settings) {
+    await this.printText(QR, BigText, Text1, Text2, Text3, Text4, settings);
   }
   /**
    * Prints labels. Do not use from outside the class
@@ -104,17 +107,17 @@ class Printer {
    * @param {String} Text3 Smaller text, 12 chars max
    * @param {String} Text4 Smaller text, 12 chars max
    */
-  #printText(QR, BigText, Text1, Text2, Text3, Text4) {
+  printText(QR, BigText, Text1, Text2, Text3, Text4, settings) {
     let data = Buffer.concat([
       TscBuffer.sizeBymm(32, 16),
       TscBuffer.cls(),
-      TscBuffer.qrCode(10, 40, "M", 5, "A", 0, QR),
-      TscBuffer.text(130, 40, 4, 0, 1, 1, BigText),
-      TscBuffer.text(130, 74, 1, 0, 1, 1, Text1),
-      TscBuffer.text(130, 88, 1, 0, 1, 1, Text2),
-      TscBuffer.text(130, 102, 1, 0, 1, 1, Text3),
-      TscBuffer.text(130, 116, 1, 0, 1, 1, Text4),
-      TscBuffer.text(130, 130, 1, 0, 1, 1, QR),
+      TscBuffer.qrCode(10, 10, "M", 5, "A", 0, QR),
+      TscBuffer.text(130, 10, settings.headerSize, 0, 1, 1, BigText),
+      TscBuffer.text(130, 44, 1, 0, 1, 1, Text1),
+      TscBuffer.text(130, 58, 1, 0, 1, 1, Text2),
+      TscBuffer.text(130, 72, 1, 0, 1, 1, Text3),
+      TscBuffer.text(130, 86, 1, 0, 1, 1, Text4),
+      TscBuffer.text(130, 100, 1, 0, 1, 1, QR),
       TscBuffer.print(1)
     ])
     xPrinterDev.Write(data)
