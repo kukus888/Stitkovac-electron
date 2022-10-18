@@ -1,11 +1,12 @@
 {
   "name": "stitkovac-electron",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Label maker app for TSC TE210 label printer",
   "main": "main.js",
   "scripts": {
     "test": "electron .",
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . --icon=icon.ico --overwrite && cp ./config.json ./Stitkovac-win32-x64/config.json"
   },
   "keywords": [
     "label",

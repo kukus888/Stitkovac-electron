@@ -23,9 +23,6 @@ document.getElementById("btnAddItem").addEventListener("click", () => {
 document.getElementById("btnPrintAll").addEventListener("click", () => {
     printAll();
 });
-document.getElementById("btnAlignPrinter").addEventListener("click", () => {
-    alignPrintHead();
-});
 document.getElementById("btnProcessCSV").addEventListener("click", () => {
     parseCSV();
 });
@@ -123,6 +120,12 @@ function parseCSV() {
         if (line != "") {
             let CN = line.split(',')[0].toString()
             let Model = line.split(',')[1].toString()
+            if(Model.startsWith("S-")){
+                Model = Model.replace("S-","");
+            }
+            if(Model.endsWith("-1")){
+                Model = Model.replace("-1","");
+            }
             if (Model === "undefined") {
                 Model = ""
             }
