@@ -134,9 +134,9 @@ function parseCSV() {
                 IMEI = ""
             }
             let SN = line.split(',')[3].toString()
-            if ((IMEI.length > 13) /*&& ((SN === undefined) || (SN === "") || (SN === "undefined"))*/) {
+            if ((IMEI.length > 12) /*&& ((SN === undefined) || (SN === "") || (SN === "undefined"))*/) {
                 //SN = IMEI.slice(12, IMEI.length)
-                IMEI = "*" + IMEI.slice(0, 11)
+                IMEI = "*" + IMEI.slice(-11)
             }
             if (SN === "undefined") {
                 SN = ""
