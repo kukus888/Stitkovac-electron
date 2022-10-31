@@ -6,7 +6,7 @@
   "scripts": {
     "test": "electron .",
     "start": "electron .",
-    "build": "electron-packager . --icon=icon.ico --overwrite && copy ./config.json ./stitkovac-electron-win32-x64/config.json"
+    "build": "electron-packager . --icon=icon.ico --overwrite && cp ./config.json ./stitkovac-electron-win32-x64/config.json || copy ./config.json ./stitkovac-electron-win32-x64/config.json"
   },
   "keywords": [
     "label",

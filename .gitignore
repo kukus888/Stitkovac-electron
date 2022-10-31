@@ -2,8 +2,8 @@ TODO.txt.bak
 rcedit-x64.exe
 node_modules/*
 Stitkovac-win32-x64/*
-stitkovac-electron-win32-x64*
 stitkovac-electron-win32-x64/*
+stitkovac-electron-win32-x64*
 Stitkovac-win32-x64/d3dcompiler_47.dll
 Stitkovac-win32-x64/ffmpeg.dll
 Stitkovac-win32-x64/chrome_100_percent.pak
