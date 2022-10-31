@@ -86,11 +86,25 @@ function handleSyncingDevices(event, data) {
   devices = data;
 }
 
+function getWarehouseLocation(){
+  let s = "";
+  for(i=0;i<config.settings.length;i++){
+    //looks for warehouse/location
+    if(config.settings[i].name == "Warehouse / Location"){
+      s = Object.values(config.settings[i].arguments[0])[0];
+      s+= " / ";
+      s+= Object.values(config.settings[i].arguments[1])[0];
+      break;
+    }
+  }
+  return s;
+}
+
 function handlePrintAll(event, data) {
   handleLoadCfg();
   try {
     devices.forEach(e => {
-      printer.printLabel(e.CN, e.Model, e.IMEI, e.SN, e.SMSN, config.signature, config)
+      printer.printLabel(e.CN, e.Model, e.IMEI, e.SN, e.SMSN, getWarehouseLocation(), config)
     });
   } catch (err) {
     win.webContents.send('printer-err', err)
