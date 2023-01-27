@@ -15,5 +15,6 @@ window.addEventListener('DOMContentLoaded', () => {
 contextBridge.exposeInMainWorld("ipcRenderer", ipcRenderer);
 contextBridge.exposeInMainWorld('electronAPI', {
   handlePrinterErr: (callback) => ipcRenderer.on('printer-err', callback),
-  AddItem: (data) => ipcRenderer.send('add-row', data)
+  AddItem: (data) => ipcRenderer.send('add-row', data),
+  handleSyncConfig: (config) => ipcRenderer.on('sync-config', config)
 })

@@ -9,67 +9,45 @@
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap-utilities.min.css" />
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Settings</title>
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <title>Print</title>
 </head>
 
 <body>
     <ul class="navbar navbar-expand-sm bg-light" id="topNavBar">
         <div class="container-fluid" id="topBarDiv">
             <li class="nav-item">
-                <h1 class="navbar-brand h1">Label maker</h1>
+                <h1 class="navbar-brand h1">Settings</h1>
             </li>
             <div class="d-flex">
                 <li class="nav-link mx-sm-2">
-                    <button class="btn btn-primary" id="btnOpenSettings" data-bs-toggle="modal" data-bs-target="#exampleModal">Settings</button>
+                    <button class="btn btn-primary" id="btnLoadCfg">Load Config</button>
                 </li>
                 <li class="nav-link mx-sm-2">
-                    <button class="btn btn-primary" id="btnLoadCSV" data-bs-toggle="modal" data-bs-target="#exampleModal">Load CSV</button>
-                </li>
-                <li class="nav-link mx-sm-2">
-                    <button class="btn btn-success" id="btnPrintAll">Print</button>
+                    <button class="btn btn-success" id="btnGoHome">Go back</button>
                 </li>
             </div>
         </div>
     </ul>
     <div class="container-fluid">
+        Note! <br/>
+        203 DPI => 1mm = 8 dots <br/>
+        300 DPI => 1mm = 11.8 dots <br/>
+    </div>
+    <div class="container-fluid">
         <table class="table table-hover table-striped me-auto" id="datatable">
             <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Control Number</th>
-                    <th scope="col">Model</th>
-                    <th scope="col">IMEI</th>
-                    <th scope="col">Serial Number</th>
-                    <th scope="col">SMSN</th>
-                    <th scope="col">Print</th>
+                <tr id="header">
+                    <th scope="col">Function</th>
+                    <th scope="col">Arguments</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody id="datatableBody">
-                <tr>
-                    <div id="newLabel" class="input-group">
-                        <td class="align-middle">~</td>
-                        <td>
-                            <input class="input bg-transparent m-0 form-control" type="text" id="inputNewCN">
-                        </td>
-                        <td>
-                            <input class="input bg-transparent m-0 form-control" type="text" id="inputNewModel">
-                        </td>
-                        <td>
-                            <input class="input bg-transparent m-0 form-control" type="text" id="inputNewIMEI">
-                        </td>
-                        <td>
-                            <input class="input bg-transparent m-0 form-control" type="text" id="inputNewSerial">
-                        </td>
-                        <td>
-                            <input class="input bg-transparent m-0 form-control border-opacity-10" type="text"
-                                id="inputNewSMSN">
-                        </td>
-                        <td>
-                            <button class="btn btn-outline-success" type="button" id="btnAddItem">Add</button>
-                        </td>
-                    </div>
-                </tr>
+                
             </tbody>
         </table>
     </div>
@@ -93,8 +71,12 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-danger" id="btnClearAll">Clear all</button>
-    <script src="./renderer.js"></script>
+    <div class="container-ld align-bottom bg-dark text-light m-lg-5 p-3">
+        <br/>
+        We are using Node.js <span id="node-version"></span>, Chromium <span id="chrome-version"></span>, and Electron
+        <span id="electron-version"></span>.
+    </div>
+    <script src="./settingsRenderer.js"></script>
 </body>
 
 </html>

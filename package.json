@@ -1,11 +1,12 @@
 {
   "name": "stitkovac-electron",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "description": "Label maker app for TSC TE210 label printer",
   "main": "main.js",
   "scripts": {
     "test": "electron .",
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . --icon=icon.ico --overwrite && cp ./config.json ./stitkovac-electron-win32-x64/config.json || copy ./config.json ./stitkovac-electron-win32-x64/config.json"
   },
   "keywords": [
     "label",
@@ -24,5 +25,13 @@
     "jimp": "^0.16.1",
     "jquery": "^3.6.0",
     "usb": "^2.4.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kukus888/Stitkovac-electron.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kukus888/Stitkovac-electron/issues"
+  },
+  "homepage": "https://github.com/kukus888/Stitkovac-electron#readme"
 }

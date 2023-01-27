@@ -4,3 +4,6 @@
 
 4. BIG: make editing saved contents happen
 5. Fix clear some
+
+6. Make changeable BRA1 / BRTN
+7. From long IMEI, cut the first characters and replace with .. and fit into 12 characters

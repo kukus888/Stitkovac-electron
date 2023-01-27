@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="180"
+   height="180"
+   viewBox="0 0 180 180"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   sodipodi:docname="Icon.svg"
+   inkscape:export-filename="C:\Users\j.sykora\Desktop\Stitkovac-electron\graphics\icon.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:snap-bbox="true"
+     inkscape:zoom="4.0111111"
+     inkscape:cx="125.77562"
+     inkscape:cy="123.1579"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Vrstva 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="rect31"
+       width="171.79529"
+       height="171.79529"
+       x="4.1023531"
+       y="4.1023531"
+       inkscape:label="rect31"
+       sodipodi:insensitive="true" />
+    <g
+       id="g1826"
+       transform="matrix(2,0,0,2,26,26.1)">
+      <path
+         d="M 57,14 H 54 V 0 H 10 V 14 H 7 c -3.9,0 -7,3.3 -7,7.3 v 21.3 c 0,4 3.1,7.3 7,7.3 h 2 v 14 H 55 V 50 h 2 c 3.9,0 7,-3.3 7,-7.3 V 21.3 C 64,17.3 60.9,14 57,14 Z M 14,4 H 50 V 14 H 14 Z M 51,60 H 13 V 41 H 51 Z M 60,42.7 C 60,44.5 58.7,46 57,46 H 55 V 37 H 9 v 9 H 7 C 5.3,46 4,44.5 4,42.7 V 21.3 C 4,19.5 5.3,18 7,18 h 50 c 1.7,0 3,1.5 3,3.3 z"
+         id="path1818" />
+      <path
+         d="m 53,20 c -2.8,0 -5,2.2 -5,5 0,2.8 2.2,5 5,5 2.8,0 5,-2.2 5,-5 0,-2.8 -2.2,-5 -5,-5 z m 0,6 c -0.6,0 -1,-0.4 -1,-1 0,-0.6 0.4,-1 1,-1 0.6,0 1,0.4 1,1 0,0.6 -0.4,1 -1,1 z"
+         id="path1820" />
+      <rect
+         x="17"
+         y="45"
+         width="30"
+         height="4"
+         id="rect1822" />
+      <rect
+         x="17"
+         y="52"
+         width="30"
+         height="4"
+         id="rect1824" />
+    </g>
+  </g>
+</svg>
